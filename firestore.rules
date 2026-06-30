@@ -1,0 +1,56 @@
+rules_version = '2';
+
+// Despliega con: firebase deploy --only firestore:rules
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userRole() {
+      return isSignedIn()
+        ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function isStaff() {
+      return userRole() == 'admin' || userRole() == 'editor';
+    }
+
+    function isAdmin() {
+      return userRole() == 'admin';
+    }
+
+    // Paquetes y proveedores: lectura pública, escritura solo staff
+    match /packages/{id} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+
+    match /suppliers/{id} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+
+    // Cotizaciones: cualquiera puede crear (formulario público),
+    // solo staff puede leer/editar/eliminar (panel admin)
+    match /quoteRequests/{id} {
+      allow create: if true;
+      allow read, update, delete: if isStaff();
+    }
+
+    // Citas de agendamiento: mismo patrón
+    match /appointments/{id} {
+      allow create: if true;
+      allow read, update, delete: if isStaff();
+    }
+
+    // Roles de usuario: cada usuario puede leer su propio documento,
+    // solo admin puede leer todos o escribir
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

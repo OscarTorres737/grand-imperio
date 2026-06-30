@@ -1,0 +1,363 @@
+/* ═══════════════════════════════════════════════════════════
+   Grand Imperio — Global Styles
+   Skills: design-taste-frontend · impeccable · emil-design-eng · ui-ux-pro-max
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Design Tokens ─────────────────────────────────────── */
+:root {
+  /* Emil Kowalski easing curves */
+  --ease-out:     cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out:  cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Duration scale */
+  --dur-press:   100ms;   /* button :active */
+  --dur-fast:    160ms;   /* tooltips, micro-feedback */
+  --dur-normal:  250ms;   /* tabs, dropdowns */
+  --dur-reveal:  320ms;   /* nav, overlays */
+  --dur-slow:    500ms;   /* hero, sections */
+  --dur-xslow:   800ms;   /* page-level reveals */
+
+  /* Brand */
+  --gold:       #C9A84C;
+  --gold-light: #E2C97A;
+  --nero:       #0A0A0A;
+  --nero-soft:  #111111;
+  --cream:      #F5F0EB;
+
+  /* Z-index scale — impeccable: never arbitrary values */
+  --z-base:    0;
+  --z-sticky:  40;
+  --z-overlay: 60;
+  --z-modal:   80;
+  --z-toast:   100;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--nero);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Typography — impeccable: text-wrap, letter-spacing ── */
+h1, h2, h3 {
+  text-wrap: balance;
+  /* letter-spacing floor: -0.04em per impeccable */
+  letter-spacing: -0.02em;
+}
+
+h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* ─── Cursor — ui-ux-pro-max: cursor:pointer on all interactive ── */
+a,
+button,
+[role="button"],
+label[for],
+summary,
+[tabindex]:not([tabindex="-1"]) {
+  cursor: pointer;
+}
+
+/* ─── Focus Rings — ui-ux-pro-max: CRITICAL accessibility ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Hero Entry Animations ─────────────────────────────── */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-anim-1 { animation: heroFadeUp var(--dur-xslow) var(--ease-out) 0.10s both; }
+.hero-anim-2 { animation: heroFadeUp var(--dur-xslow) var(--ease-out) 0.25s both; }
+.hero-anim-3 { animation: heroFadeUp var(--dur-slow)  var(--ease-out) 0.42s both; }
+.hero-anim-4 { animation: heroFadeUp var(--dur-slow)  var(--ease-out) 0.58s both; }
+
+/* ─── Scroll Reveal — impeccable: enhance visible default ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity  var(--dur-xslow) var(--ease-out),
+    transform var(--dur-xslow) var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.stagger-1 { transition-delay: 0.10s; }
+.stagger-2 { transition-delay: 0.20s; }
+.stagger-3 { transition-delay: 0.30s; }
+.stagger-4 { transition-delay: 0.40s; }
+
+/* ─── Buttons — Emil: precise transitions, scale feedback ── */
+.btn-grand {
+  display: inline-block;
+  cursor: pointer;
+  /* Separate transition: bg fast, transform instant */
+  transition:
+    background-color var(--dur-normal) var(--ease-out),
+    color            var(--dur-normal) var(--ease-out),
+    border-color     var(--dur-normal) var(--ease-out),
+    transform        var(--dur-press)  var(--ease-out);
+  /* ui-ux-pro-max: min 44×44px touch target */
+  min-height: 44px;
+}
+
+.btn-grand:active {
+  transform: scale(0.97);
+  transition-duration: var(--dur-press);
+}
+
+/* ─── Nav Links — animated underline ───────────────────────── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-normal) var(--ease-out);
+}
+
+/* Emil: gate hover on pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.nav-link.active-link::after {
+  transform: scaleX(1);
+}
+
+/* ─── Image Hover Zoom — with hover guard ───────────────── */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 700ms var(--ease-out);
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .img-zoom:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* ─── Gallery Tabs ──────────────────────────────────────── */
+.gallery-tab {
+  position: relative;
+  transition: color var(--dur-normal) var(--ease-out);
+}
+
+.gallery-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-normal) var(--ease-out);
+}
+
+.gallery-tab.tab-active::after {
+  transform: scaleX(1);
+}
+
+/* ─── Testimonial Crossfade ─────────────────────────────── */
+.testimonial-content {
+  transition:
+    opacity  var(--dur-normal) var(--ease-out),
+    transform var(--dur-normal) var(--ease-out);
+}
+
+.testimonial-content.fading {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* ─── Form Fields — ui-ux-pro-max: visible labels, focus ── */
+.field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 235, 0.45);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.field-wrap:focus-within .field-label {
+  color: var(--gold);
+}
+
+.field-input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(245, 240, 235, 0.15);
+  color: var(--cream);
+  padding: 10px 0;
+  width: 100%;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  /* Emil: separate transition per property */
+  transition: border-color var(--dur-normal) var(--ease-out);
+  min-height: 44px; /* ui-ux-pro-max: touch target */
+}
+
+.field-input::placeholder {
+  color: rgba(245, 240, 235, 0.28);
+}
+
+.field-input:focus {
+  border-color: var(--gold);
+}
+
+.field-input option {
+  background: #1A1A1A;
+  color: var(--cream);
+}
+
+/* ─── Calendar ──────────────────────────────────────────── */
+.cal-day-available {
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    color      var(--dur-fast) var(--ease-out);
+  min-height: 44px; /* touch target */
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cal-day-available:hover {
+    background: rgba(201, 168, 76, 0.14);
+    color: var(--gold);
+  }
+}
+
+.cal-day-selected {
+  background: var(--gold) !important;
+  color: var(--nero) !important;
+}
+
+/* ─── WhatsApp Button ───────────────────────────────────── */
+.whatsapp-btn {
+  transition:
+    transform var(--dur-normal) var(--ease-out),
+    box-shadow var(--dur-normal) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  }
+}
+
+.whatsapp-btn:active {
+  transform: scale(0.95);
+  transition-duration: var(--dur-press);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--nero); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.25); border-radius: 2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.45); }
+}
+
+/* ─── View Transitions ──────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: 180ms ease both fade-out-vt; }
+  ::view-transition-new(root) { animation: 320ms var(--ease-out) both fade-in-vt; }
+}
+
+@keyframes fade-out-vt { to { opacity: 0; } }
+@keyframes fade-in-vt  { from { opacity: 0; transform: translateY(5px); } }
+
+/* ─── Reduced Motion — Emil & ui-ux-pro-max: mandatory ──── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim-1,
+  .hero-anim-2,
+  .hero-anim-3,
+  .hero-anim-4 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal,
+  .reveal.stagger-1,
+  .reveal.stagger-2,
+  .reveal.stagger-3,
+  .reveal.stagger-4 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .img-zoom img,
+  .testimonial-content,
+  .gallery-tab,
+  .nav-link::after,
+  .btn-grand {
+    transition-duration: 0ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ─── Mobile safe area ──────────────────────────────────── */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

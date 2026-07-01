@@ -51,8 +51,6 @@ export class AdminLoginComponent {
     this.error.set('');
     this.loading.set(true);
     try {
-      // login() proves the credentials are correct AND resolves the matching
-      // role document — null means "signed in, but no usable role" (see authError).
       const appUser = await this.auth.login(this.email, this.password);
 
       if (appUser) {

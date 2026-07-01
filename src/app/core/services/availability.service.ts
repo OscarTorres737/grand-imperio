@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class AvailabilityService {
   getSlotsForDate(date: Date): string[] {
-    const day = date.getDay(); // 0=Dom, 1=Lun ... 6=Sab
+    const day = date.getDay();
     const slots: string[] = [];
 
     let startHour = 9, startMin = 0;
     let endHour = 19, endMin = 30;
 
-    if (day === 0) { // Domingo
+    if (day === 0) {
       startHour = 12; startMin = 0;
       endHour = 18; endMin = 0;
     }

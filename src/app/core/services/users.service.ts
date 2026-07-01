@@ -14,8 +14,6 @@ export class UsersService {
     return collectionData(this.colRef, { idField: 'uid' }) as Observable<AppUser[]>;
   }
 
-  // uid must already exist in Firebase Auth (create the Auth user from the
-  // Firebase console first, then register their role here with that uid).
   async upsertRole(uid: string, email: string, displayName: string, role: AppUser['role']): Promise<void> {
     await setDoc(doc(this.firestore, 'users', uid), { email, displayName, role, createdAt: new Date() });
   }

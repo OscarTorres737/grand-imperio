@@ -11,17 +11,13 @@ export class AuthService {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
 
-  // null = signed out (or no role doc), undefined = initial auth state not resolved yet
   currentUser = signal<AppUser | null | undefined>(undefined);
-  // Surfaces *why* a signed-in user ended up signed out (denied rules, missing role doc, etc.)
   authError = signal<string | null>(null);
 
   constructor() {
     onAuthStateChanged(this.auth, (user: User | null) => this.resolveRole(user));
   }
 
-  /** Signs in, then resolves (and returns) the matching role document directly —
-   *  callers don't need to poll `currentUser` waiting for onAuthStateChanged to fire. */
   async login(email: string, password: string): Promise<AppUser | null> {
     const cred = await signInWithEmailAndPassword(this.auth, email, password);
     return this.resolveRole(cred.user);
@@ -49,8 +45,6 @@ export class AuthService {
     }
 
     try {
-      // Firestore calls must run inside Angular's injection context to avoid
-      // the "outside injection context" warning and zone-stability issues.
       const snap = await runInInjectionContext(this.injector, () =>
         getDoc(doc(this.firestore, 'users', user.uid))
       );
@@ -69,8 +63,6 @@ export class AuthService {
       this.currentUser.set(appUser);
       return appUser;
     } catch (err) {
-      // Most common cause: firestore.rules not published yet, or the users/{uid}
-      // document ID doesn't match the Auth UID, so the rules' get() call fails.
       console.error('AuthService: failed to read role document', err);
       this.authError.set(
         'No se pudo verificar tu rol en Firestore (permisos denegados). ' +

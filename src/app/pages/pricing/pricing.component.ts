@@ -10,7 +10,6 @@ import { VenuePackage } from '../../core/models/package.model';
   standalone: true,
   imports: [NgFor, NgIf, CurrencyPipe, FormsModule],
   template: `
-    <!-- Header -->
     <section class="pt-36 pb-14 px-6 lg:px-16 xl:px-20 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
         <div class="w-8 h-[3px] bg-[#C9A84C] mb-8"></div>
@@ -24,7 +23,6 @@ import { VenuePackage } from '../../core/models/package.model';
       </div>
     </section>
 
-    <!-- Packages grid — asimétrico: el primero destacado -->
     <section class="px-6 lg:px-16 xl:px-20 pb-20 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
         <div *ngIf="loading()" class="text-[#F5F0EB]/35 text-sm py-12">Cargando paquetes...</div>
@@ -83,7 +81,6 @@ import { VenuePackage } from '../../core/models/package.model';
       </div>
     </section>
 
-    <!-- Calculadora dinámica -->
     <section #calculator class="py-20 lg:py-28 px-6 lg:px-16 xl:px-20 bg-[#111111] border-t border-[#C9A84C]/15">
       <div class="max-w-4xl mx-auto">
         <p class="text-[#C9A84C] text-[9px] font-semibold tracking-[0.5em] uppercase mb-4">Calculadora</p>
@@ -94,7 +91,6 @@ import { VenuePackage } from '../../core/models/package.model';
 
         <div *ngIf="!submitted()" class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12">
 
-          <!-- Form -->
           <div class="flex flex-col gap-6">
             <div class="field-wrap">
               <label class="field-label" for="pkgSel">Paquete base</label>
@@ -146,7 +142,6 @@ import { VenuePackage } from '../../core/models/package.model';
             </div>
           </div>
 
-          <!-- Resultado -->
           <div class="bg-[#0A0A0A] border border-[#C9A84C]/20 p-8 flex flex-col h-fit">
             <p class="text-[#F5F0EB]/35 text-[10px] font-semibold tracking-[0.3em] uppercase mb-3">Total estimado</p>
             <p class="font-display font-black text-[#C9A84C] leading-none mb-6" style="font-size: clamp(2.2rem, 4vw, 3.2rem)">
@@ -169,7 +164,6 @@ import { VenuePackage } from '../../core/models/package.model';
           </div>
         </div>
 
-        <!-- Confirmación -->
         <div *ngIf="submitted()" class="text-center py-16 reveal visible">
           <div class="w-14 h-14 border border-[#C9A84C] rounded-full flex items-center justify-center mx-auto mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="text-[#C9A84C]">

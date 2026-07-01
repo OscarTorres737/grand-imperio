@@ -15,7 +15,6 @@ type Tab = 'packages' | 'suppliers' | 'leads' | 'users';
   imports: [NgIf, NgSwitch, NgSwitchCase, PackagesAdminComponent, SuppliersAdminComponent, LeadsAdminComponent, UsersAdminComponent],
   template: `
     <div class="min-h-[100dvh] bg-[#0A0A0A]">
-      <!-- Top bar -->
       <header class="border-b border-[#F5F0EB]/8 px-6 lg:px-12 py-5 flex items-center justify-between">
         <div>
           <p class="font-display font-black text-[#F5F0EB] uppercase text-sm tracking-wide">Grand Imperio · Panel</p>
@@ -27,7 +26,6 @@ type Tab = 'packages' | 'suppliers' | 'leads' | 'users';
       </header>
 
       <div class="flex flex-col lg:flex-row">
-        <!-- Tabs -->
         <nav class="flex lg:flex-col gap-1 px-6 lg:px-4 py-4 lg:py-8 lg:w-56 lg:flex-shrink-0 overflow-x-auto border-b lg:border-b-0 lg:border-r border-[#F5F0EB]/8">
           <button (click)="tab.set('packages')" class="text-left px-4 py-3 text-[11px] font-semibold tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200"
                   [class]="tab() === 'packages' ? 'bg-[#C9A84C]/12 text-[#C9A84C]' : 'text-[#F5F0EB]/45 hover:text-[#F5F0EB]/75'">Paquetes</button>
@@ -39,7 +37,6 @@ type Tab = 'packages' | 'suppliers' | 'leads' | 'users';
                   [class]="tab() === 'users' ? 'bg-[#C9A84C]/12 text-[#C9A84C]' : 'text-[#F5F0EB]/45 hover:text-[#F5F0EB]/75'">Usuarios</button>
         </nav>
 
-        <!-- Content -->
         <main class="flex-1 px-6 lg:px-12 py-10 max-w-4xl" [ngSwitch]="tab()">
           <app-packages-admin *ngSwitchCase="'packages'" />
           <app-suppliers-admin *ngSwitchCase="'suppliers'" />

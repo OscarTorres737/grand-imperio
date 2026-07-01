@@ -8,7 +8,6 @@ import { Supplier, SUPPLIER_CATEGORIES, SupplierCategory } from '../../core/mode
   standalone: true,
   imports: [NgFor, NgIf, CurrencyPipe],
   template: `
-    <!-- Header -->
     <section class="pt-36 pb-12 px-6 lg:px-16 xl:px-20 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
         <div class="w-8 h-[3px] bg-[#C9A84C] mb-8"></div>
@@ -22,7 +21,6 @@ import { Supplier, SUPPLIER_CATEGORIES, SupplierCategory } from '../../core/mode
       </div>
     </section>
 
-    <!-- Filtros por categoría -->
     <section class="bg-[#0A0A0A] px-6 lg:px-16 xl:px-20 sticky top-[68px] z-[var(--z-sticky)] border-b border-[#F5F0EB]/8">
       <div class="max-w-7xl mx-auto flex gap-6 lg:gap-8 overflow-x-auto" role="tablist">
         <button (click)="setCategory(null)"
@@ -42,7 +40,6 @@ import { Supplier, SUPPLIER_CATEGORIES, SupplierCategory } from '../../core/mode
       </div>
     </section>
 
-    <!-- Grid de proveedores -->
     <section class="py-12 px-6 lg:px-16 xl:px-20 bg-[#0A0A0A] min-h-screen">
       <div class="max-w-7xl mx-auto">
         <div *ngIf="loading()" class="text-[#F5F0EB]/35 text-sm py-12">Cargando proveedores...</div>

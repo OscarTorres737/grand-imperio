@@ -8,8 +8,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   template: `
     <nav [class]="navClass()"
          class="fixed top-0 left-0 right-0 z-[var(--z-sticky)] transition-[background-color,border-color,backdrop-filter] duration-400">
-      <!-- Scrim permanente: garantiza legibilidad del logo/links sin importar qué haya detrás
-           (imagen clara del hero, video, etc.), incluso antes de hacer scroll -->
       <div class="absolute inset-0 -z-10 pointer-events-none transition-opacity duration-400"
            [style.opacity]="scrolled() ? '0' : '1'"
            style="background: linear-gradient(to bottom, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.32) 60%, transparent 100%)">
@@ -17,7 +15,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       <div class="max-w-7xl mx-auto px-6 lg:px-16 xl:px-24">
         <div class="flex items-center justify-between h-[68px]">
 
-          <!-- Logo -->
           <a routerLink="/" class="flex items-center shrink-0">
             <img src="logo.png" alt="Grand Imperio Social Venue" class="h-10 w-auto"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
@@ -26,9 +23,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             </span>
           </a>
 
-          <!-- Desktop nav -->
           <div class="hidden lg:flex items-center gap-6 xl:gap-7">
-            <!-- Emil: nav-link class uses scaleX underline; routerLinkActive adds active-link -->
             <a routerLink="/" routerLinkActive="active-link !text-[#C9A84C]" [routerLinkActiveOptions]="{exact:true}"
                class="nav-link text-[11px] tracking-[0.15em] uppercase text-[#F5F0EB]/55 hover:text-[#F5F0EB] transition-colors duration-250 py-1 whitespace-nowrap">
               Inicio
@@ -53,14 +48,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                class="nav-link text-[11px] tracking-[0.15em] uppercase text-[#F5F0EB]/55 hover:text-[#F5F0EB] transition-colors duration-250 py-1 whitespace-nowrap">
               Contacto
             </a>
-            <!-- ui-ux-pro-max: min 44px touch target; btn-grand for precise transitions -->
             <a routerLink="/agendar"
                class="btn-grand bg-[#0A0A0A] ml-1 px-5 py-3 border border-[#C9A84C]/60 text-[#C9A84C] text-[11px] tracking-[0.15em] uppercase hover:bg-[#C9A84C] hover:border-[#C9A84C] hover:text-[#0A0A0A] whitespace-nowrap">
               Agendar Visita
             </a>
           </div>
 
-          <!-- Mobile hamburger — 44×44 touch target -->
           <button (click)="toggleMenu()"
                   class="lg:hidden flex flex-col gap-[5px] p-3 -mr-3 w-11 h-11 items-center justify-center"
                   [attr.aria-expanded]="menuOpen()"
@@ -75,7 +68,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           </button>
         </div>
 
-        <!-- Mobile menu — Emil: opacity+transform, NOT max-height (layout property) -->
         <div class="lg:hidden border-t border-[#F5F0EB]/8 overflow-hidden"
              [style.max-height]="menuOpen() ? '360px' : '0px'"
              [style.opacity]="menuOpen() ? '1' : '0'"

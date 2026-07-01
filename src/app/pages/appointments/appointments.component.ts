@@ -9,7 +9,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
   standalone: true,
   imports: [ReactiveFormsModule, NgIf, NgFor, RouterLink],
   template: `
-    <!-- Header -->
     <section class="pt-36 pb-16 px-6 bg-[#0A0A0A] text-center">
       <span class="text-[#C9A84C] text-xs tracking-widest uppercase mb-4 block">Visítanos</span>
       <h1 class="font-display text-5xl md:text-6xl text-[#F5F0EB] font-light mb-6">Agendar Visita</h1>
@@ -22,7 +21,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
     <section class="py-16 px-6 bg-[#0A0A0A] min-h-screen">
       <div class="max-w-2xl mx-auto">
 
-        <!-- Success Modal -->
         <div *ngIf="submitted()"
              class="border border-[#C9A84C]/30 bg-[#C9A84C]/5 p-12 text-center">
           <div class="w-16 h-16 border border-[#C9A84C] rounded-full flex items-center justify-center mx-auto mb-6">
@@ -36,11 +34,9 @@ import { AppointmentsService } from '../../core/services/appointments.service';
           </a>
         </div>
 
-        <!-- Form -->
         <form *ngIf="!submitted()" [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Name -->
             <div>
               <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Nombre completo *</label>
               <input formControlName="name" type="text"
@@ -50,7 +46,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
               <p *ngIf="isInvalid('name')" class="text-red-400 text-xs mt-1">Campo requerido</p>
             </div>
 
-            <!-- Phone -->
             <div>
               <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Teléfono *</label>
               <input formControlName="phone" type="tel"
@@ -61,7 +56,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
             </div>
           </div>
 
-          <!-- Email -->
           <div>
             <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Correo electrónico *</label>
             <input formControlName="email" type="email"
@@ -72,7 +66,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Date -->
             <div>
               <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Fecha de visita *</label>
               <input formControlName="date" type="date"
@@ -82,7 +75,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
               <p *ngIf="isInvalid('date')" class="text-red-400 text-xs mt-1">Campo requerido</p>
             </div>
 
-            <!-- Time -->
             <div>
               <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Hora *</label>
               <select formControlName="time"
@@ -95,7 +87,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
             </div>
           </div>
 
-          <!-- Event Type -->
           <div>
             <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Tipo de evento que planea *</label>
             <select formControlName="eventType"
@@ -107,7 +98,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
             <p *ngIf="isInvalid('eventType')" class="text-red-400 text-xs mt-1">Campo requerido</p>
           </div>
 
-          <!-- Notes -->
           <div>
             <label class="block text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Notas adicionales</label>
             <textarea formControlName="notes" rows="4"
@@ -115,7 +105,6 @@ import { AppointmentsService } from '../../core/services/appointments.service';
                       class="w-full bg-transparent border border-[#C9A84C]/20 focus:border-[#C9A84C]/60 px-4 py-3 text-[#F5F0EB] placeholder-[#F5F0EB]/20 text-sm focus:outline-none transition-colors duration-300 resize-none"></textarea>
           </div>
 
-          <!-- Submit -->
           <div class="pt-4">
             <button type="submit"
                     [disabled]="loading()"
@@ -161,13 +150,11 @@ export class AppointmentsComponent implements OnInit {
       notes: ['']
     });
 
-    // Pre-fill from query params (coming from availability page)
     this.route.queryParams.subscribe(params => {
       if (params['date']) this.form.patchValue({ date: params['date'] });
       if (params['time']) this.form.patchValue({ time: params['time'] });
     });
 
-    // Generate time options 9:00–19:30 every 30 min
     for (let h = 9; h < 20; h++) {
       for (const m of [0, 30]) {
         if (h === 19 && m === 30) break;

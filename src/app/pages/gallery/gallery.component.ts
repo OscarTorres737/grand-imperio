@@ -12,7 +12,6 @@ interface GalleryImage {
   standalone: true,
   imports: [NgFor, NgIf],
   template: `
-    <!-- Page header -->
     <section class="pt-36 pb-12 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
         <div class="w-8 h-px bg-[#C9A84C] mb-8"></div>
@@ -23,7 +22,6 @@ interface GalleryImage {
       </div>
     </section>
 
-    <!-- Filter tabs — gallery-tab + tab-active for scaleX underline (Emil) -->
     <section class="bg-[#0A0A0A] px-6 lg:px-16 xl:px-24 sticky top-[68px] z-[var(--z-sticky)] border-b border-[#F5F0EB]/8">
       <div class="max-w-7xl mx-auto flex gap-8 lg:gap-10" role="tablist">
         <button *ngFor="let tab of tabs"
@@ -38,7 +36,6 @@ interface GalleryImage {
       </div>
     </section>
 
-    <!-- Masonry grid -->
     <section class="py-10 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A] min-h-screen" role="tabpanel">
       <div class="max-w-7xl mx-auto columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
         <div *ngFor="let img of filteredImages()"
@@ -51,7 +48,6 @@ interface GalleryImage {
           <img [src]="img.url" [alt]="img.alt"
                loading="lazy"
                class="w-full object-cover">
-          <!-- Hover overlay — Emil: opacity transition with hover guard via @media in CSS -->
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                style="background: rgba(10,10,10,0.35)" aria-hidden="true">
             <div class="w-10 h-10 border border-[#F5F0EB]/60 flex items-center justify-center">
@@ -64,7 +60,6 @@ interface GalleryImage {
       </div>
     </section>
 
-    <!-- Lightbox — Emil: scale+fade from scale(0.96), not scale(0) -->
     <div *ngIf="lightboxOpen()"
          class="fixed inset-0 flex items-center justify-center"
          [style.z-index]="'var(--z-modal)'"
@@ -73,7 +68,6 @@ interface GalleryImage {
          role="dialog"
          [attr.aria-label]="'Imagen: ' + (lightboxImage()?.alt || '')">
 
-      <!-- Close — 44×44 touch target -->
       <button class="absolute top-4 right-4 w-11 h-11 flex items-center justify-center text-[#F5F0EB]/50 hover:text-[#F5F0EB] transition-colors duration-200"
               aria-label="Cerrar"
               (click)="closeLightbox()">
@@ -82,7 +76,6 @@ interface GalleryImage {
         </svg>
       </button>
 
-      <!-- Image — Emil: enters from scale(0.96), not scale(0) -->
       <img *ngIf="lightboxImage()"
            [src]="lightboxImage()!.url"
            [alt]="lightboxImage()!.alt"

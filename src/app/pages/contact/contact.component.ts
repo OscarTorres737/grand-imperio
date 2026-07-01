@@ -6,7 +6,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   template: `
-    <!-- Header -->
     <section class="pt-36 pb-12 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
         <div class="w-8 h-px bg-[#C9A84C] mb-8"></div>
@@ -21,7 +20,6 @@ import { RouterLink } from '@angular/router';
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-16 lg:gap-24">
 
-          <!-- Map -->
           <div class="order-2 lg:order-1">
             <div class="relative overflow-hidden h-[360px] lg:h-[480px]">
               <iframe
@@ -43,10 +41,8 @@ import { RouterLink } from '@angular/router';
             </a>
           </div>
 
-          <!-- Info -->
           <div class="order-1 lg:order-2">
 
-            <!-- Address & phone -->
             <div class="mb-12">
               <p class="text-[#F5F0EB]/30 text-[10px] tracking-[0.28em] uppercase mb-6">Donde encontrarnos</p>
               <div class="space-y-6">
@@ -73,7 +69,6 @@ import { RouterLink } from '@angular/router';
               </div>
             </div>
 
-            <!-- Hours -->
             <div>
               <p class="text-[#F5F0EB]/30 text-[10px] tracking-[0.28em] uppercase mb-6">Horario de atencion</p>
               <div class="space-y-0">
@@ -88,7 +83,6 @@ import { RouterLink } from '@angular/router';
               </div>
             </div>
 
-            <!-- CTA -->
             <div class="mt-12 pt-10 border-t border-[#F5F0EB]/8">
               <a routerLink="/agendar"
                  class="btn-grand inline-block px-10 py-4 bg-[#C9A84C] text-[#0A0A0A] text-[11px] tracking-[0.22em] uppercase font-medium hover:bg-[#E2C97A]">

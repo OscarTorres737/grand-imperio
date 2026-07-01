@@ -8,7 +8,6 @@ import { AvailabilityService } from '../../core/services/availability.service';
   standalone: true,
   imports: [NgFor, NgIf],
   template: `
-    <!-- Header -->
     <section class="pt-36 pb-16 px-6 bg-[#0A0A0A] text-center">
       <span class="text-[#C9A84C] text-xs tracking-widest uppercase mb-4 block">Planifica tu visita</span>
       <h1 class="font-display text-5xl md:text-6xl text-[#F5F0EB] font-light mb-6">Disponibilidad</h1>
@@ -20,9 +19,7 @@ import { AvailabilityService } from '../../core/services/availability.service';
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          <!-- Calendar -->
           <div class="border border-[#C9A84C]/20 p-8">
-            <!-- Month navigation -->
             <div class="flex items-center justify-between mb-8">
               <button (click)="prevMonth()"
                       class="text-[#C9A84C] hover:text-[#E2C97A] transition-colors p-2 text-xl">‹</button>
@@ -33,14 +30,12 @@ import { AvailabilityService } from '../../core/services/availability.service';
                       class="text-[#C9A84C] hover:text-[#E2C97A] transition-colors p-2 text-xl">›</button>
             </div>
 
-            <!-- Day headers -->
             <div class="grid grid-cols-7 mb-2">
               <div *ngFor="let d of dayNames" class="text-center text-[#F5F0EB]/30 text-xs tracking-widest uppercase py-2">
                 {{ d }}
               </div>
             </div>
 
-            <!-- Days grid -->
             <div class="grid grid-cols-7 gap-1">
               <div *ngFor="let day of calendarDays()"
                    [class]="getDayClass(day)"
@@ -50,7 +45,6 @@ import { AvailabilityService } from '../../core/services/availability.service';
             </div>
           </div>
 
-          <!-- Time Slots -->
           <div>
             <div *ngIf="!selectedDate()" class="h-full flex flex-col items-center justify-center text-center py-12">
               <div class="w-16 h-16 border border-[#C9A84C]/20 rounded-full flex items-center justify-center mb-4">
@@ -85,7 +79,6 @@ import { AvailabilityService } from '../../core/services/availability.service';
           </div>
         </div>
 
-        <!-- Info Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
           <div class="border border-[#C9A84C]/10 p-6 text-center">
             <p class="text-[#C9A84C] text-xs tracking-widest uppercase mb-2">Lunes – Sábado</p>

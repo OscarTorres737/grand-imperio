@@ -7,20 +7,12 @@ import { NgFor } from '@angular/common';
   standalone: true,
   imports: [RouterLink, NgFor],
   template: `
-
-    <!-- ══════════════════════════════════════════════════════
-         HERO — Split panel: texto izquierda / imagen derecha
-         No "texto sobre overlay" — layout completamente distinto
-    ══════════════════════════════════════════════════════════ -->
     <section class="min-h-[100dvh] flex flex-col lg:flex-row overflow-hidden">
 
-      <!-- Lado izquierdo: panel de texto -->
-      <!-- pt-28/lg:pt-24: deja libre el alto del navbar fijo (68px) para que nada se solape -->
       <div class="relative z-10 flex flex-col bg-[#0A0A0A] px-8 md:px-14 lg:px-16 xl:px-20
                   pt-28 pb-12 lg:pt-24 lg:pb-12 lg:justify-between"
            style="flex: 0 0 42%; min-height: 60vh">
 
-        <!-- Centro: headline principal -->
         <div class="flex-1 flex flex-col justify-center lg:py-8">
           <h1 class="font-display font-black text-[#F5F0EB] uppercase leading-[0.95] tracking-[-0.03em] hero-anim-1"
               style="font-size: clamp(3.2rem, 5.5vw, 5.8rem)">
@@ -29,7 +21,6 @@ import { NgFor } from '@angular/common';
             <span class="text-[#C9A84C]">Perfecto.</span>
           </h1>
 
-          <!-- Línea gold separadora -->
           <div class="w-14 h-[3px] bg-[#C9A84C] mt-8 mb-7 hero-anim-2"></div>
 
           <p class="text-[#F5F0EB]/55 text-[14px] font-light leading-relaxed tracking-wide mb-10 max-w-[20rem] hero-anim-2"
@@ -37,7 +28,6 @@ import { NgFor } from '@angular/common';
             Bodas, XV Años y eventos corporativos en Guadalupe, Nuevo León.
           </p>
 
-          <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-3 hero-anim-3">
             <a routerLink="/agendar"
                class="btn-grand inline-flex items-center justify-center px-8 py-3.5
@@ -54,7 +44,6 @@ import { NgFor } from '@angular/common';
           </div>
         </div>
 
-        <!-- Bottom: rating -->
         <div class="hidden lg:flex items-center gap-4 pb-10 hero-anim-4">
           <span class="font-display font-black text-[#C9A84C] text-3xl leading-none">4.7</span>
           <div class="border-l border-[#F5F0EB]/10 pl-4">
@@ -64,18 +53,15 @@ import { NgFor } from '@angular/common';
         </div>
       </div>
 
-      <!-- Lado derecho: imagen full-bleed, sin overlay -->
       <div class="relative overflow-hidden h-[50vh] lg:h-auto" style="flex: 1">
         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1600&q=85"
              alt="Grand Imperio Social Venue — salón principal"
              class="w-full h-full object-cover hero-anim-1"
              loading="eager"
              style="animation-duration: 1.2s">
-        <!-- Transición suave lado izquierdo -->
         <div class="absolute inset-y-0 left-0 w-12 hidden lg:block"
              style="background: linear-gradient(to right, #0A0A0A, transparent)">
         </div>
-        <!-- Scroll indicator desktop -->
         <div class="absolute bottom-10 right-8 hidden lg:flex flex-col items-center gap-2">
           <span class="text-[#F5F0EB]/25 text-[8px] tracking-[0.35em] uppercase"
                 style="writing-mode: vertical-rl; transform: rotate(180deg)">Scroll</span>
@@ -84,9 +70,6 @@ import { NgFor } from '@angular/common';
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════
-         STATS — Banda horizontal con números grandes
-    ══════════════════════════════════════════════════════════ -->
     <section class="bg-[#111111] border-y border-[#C9A84C]/15">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-3 divide-x divide-[#C9A84C]/15">
@@ -109,16 +92,11 @@ import { NgFor } from '@angular/common';
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════
-         NOSOTROS — Grid editorial: texto + imagen
-    ══════════════════════════════════════════════════════════ -->
     <section class="py-24 lg:py-36 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto px-8 lg:px-16 xl:px-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
 
-          <!-- Texto -->
           <div class="reveal">
-            <!-- Acento vertical gold -->
             <div class="flex gap-6 items-stretch mb-10">
               <div class="w-[3px] bg-[#C9A84C] self-stretch flex-shrink-0"></div>
               <h2 class="font-display font-black text-[#F5F0EB] uppercase leading-[1.05] tracking-[-0.02em]"
@@ -138,23 +116,17 @@ import { NgFor } from '@angular/common';
             </a>
           </div>
 
-          <!-- Imagen -->
           <div class="img-zoom relative h-[400px] lg:h-[540px] overflow-hidden reveal stagger-1">
             <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=85"
                  alt="Evento de gala Grand Imperio"
                  class="w-full h-full object-cover">
-            <!-- Borde gold decorativo desplazado -->
             <div class="absolute -bottom-3 -right-3 w-24 h-24 border border-[#C9A84C]/30 pointer-events-none"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════
-         ESPACIOS — Layout asimétrico: 1 grande + 2 apiladas
-    ══════════════════════════════════════════════════════════ -->
     <section class="bg-[#0A0A0A] border-t border-[#F5F0EB]/5">
-      <!-- Header de sección -->
       <div class="max-w-7xl mx-auto px-8 lg:px-16 xl:px-20 pt-20 pb-12">
         <div class="flex items-end justify-between">
           <div class="reveal">
@@ -176,11 +148,9 @@ import { NgFor } from '@angular/common';
         </div>
       </div>
 
-      <!-- Grid de imágenes -->
       <div class="px-8 lg:px-16 xl:px-20 pb-20">
         <div class="flex flex-col lg:flex-row gap-3">
 
-          <!-- Salón Principal — grande -->
           <div class="img-zoom group relative overflow-hidden h-[400px] lg:h-[580px] reveal" style="flex: 2.2">
             <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=85"
                  alt="Salón Principal Grand Imperio"
@@ -202,7 +172,6 @@ import { NgFor } from '@angular/common';
             </div>
           </div>
 
-          <!-- Columna derecha: 2 imágenes apiladas -->
           <div class="flex flex-col gap-3" style="flex: 1">
             <div class="img-zoom group relative overflow-hidden h-[280px] lg:h-[283px] reveal stagger-1">
               <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=85"
@@ -235,9 +204,6 @@ import { NgFor } from '@angular/common';
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════
-         EVENTOS — Tira tipográfica con tipos de evento
-    ══════════════════════════════════════════════════════════ -->
     <section class="py-24 lg:py-32 bg-[#111111] border-t border-[#F5F0EB]/5">
       <div class="max-w-7xl mx-auto px-8 lg:px-16 xl:px-20 reveal">
         <h2 class="font-display font-black text-[#F5F0EB] uppercase leading-[0.95] tracking-[-0.03em] mb-14"
@@ -245,7 +211,6 @@ import { NgFor } from '@angular/common';
           Celebramos<br>
           <span class="text-[#C9A84C]">contigo.</span>
         </h2>
-        <!-- Lista de tipos de evento -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-y-5 gap-x-8">
           <div *ngFor="let type of eventTypes"
                class="flex items-center gap-3 group">
@@ -259,17 +224,12 @@ import { NgFor } from '@angular/common';
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════
-         TESTIMONIOS — Quote grande, crossfade
-    ══════════════════════════════════════════════════════════ -->
     <section class="py-24 lg:py-36 bg-[#0A0A0A] border-t border-[#F5F0EB]/5">
       <div class="max-w-5xl mx-auto px-8 lg:px-16 xl:px-20">
 
-        <!-- Comilla decorativa -->
         <div class="font-display font-black text-[#C9A84C]/10 leading-none select-none mb-4 reveal"
              style="font-size: 9rem" aria-hidden="true">"</div>
 
-        <!-- Contenido con crossfade -->
         <div class="testimonial-content reveal stagger-1" [class.fading]="testimonialFading()">
           <blockquote class="font-display font-semibold text-[#F5F0EB] leading-[1.45] mb-10 tracking-[-0.01em]"
                       style="font-size: clamp(1.25rem, 2.5vw, 2rem)">
@@ -288,7 +248,6 @@ import { NgFor } from '@angular/common';
           </div>
         </div>
 
-        <!-- Navegación -->
         <div class="flex items-center gap-5 mt-12 reveal stagger-2">
           <button (click)="prevTestimonial()"
                   class="btn-grand w-10 h-10 border border-[#C9A84C]/25 flex items-center justify-center
@@ -319,11 +278,7 @@ import { NgFor } from '@angular/common';
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════
-         CTA FINAL — Bold, directo, con número de teléfono
-    ══════════════════════════════════════════════════════════ -->
     <section class="relative overflow-hidden bg-[#0A0A0A] border-t border-[#C9A84C]/20">
-      <!-- Acento dorado background -->
       <div class="absolute inset-0 pointer-events-none"
            style="background: radial-gradient(ellipse 55% 60% at 50% 110%, rgba(201,168,76,0.08) 0%, transparent 70%)">
       </div>

@@ -11,7 +11,6 @@ import { RouterLink } from '@angular/router';
 
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-12 lg:gap-20 mb-16">
 
-          <!-- Brand -->
           <div class="max-w-xs">
             <img src="logo.png" alt="Grand Imperio Social Venue" class="h-12 w-auto mb-6"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
@@ -23,7 +22,6 @@ import { RouterLink } from '@angular/router';
             </p>
           </div>
 
-          <!-- Navigation -->
           <div>
             <p class="text-[#F5F0EB]/30 text-[10px] tracking-[0.28em] uppercase mb-6">Navegacion</p>
             <ul class="space-y-3.5">
@@ -37,7 +35,6 @@ import { RouterLink } from '@angular/router';
             </ul>
           </div>
 
-          <!-- Contact & Hours -->
           <div>
             <p class="text-[#F5F0EB]/30 text-[10px] tracking-[0.28em] uppercase mb-6">Contacto</p>
             <ul class="space-y-3 text-sm text-[#F5F0EB]/45 mb-8">

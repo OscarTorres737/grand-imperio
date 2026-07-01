@@ -21,7 +21,6 @@ const EMPTY: Omit<VenuePackage, 'id'> = {
       </button>
     </div>
 
-    <!-- Form -->
     <div *ngIf="editing()" class="bg-[#111111] border border-[#C9A84C]/20 p-6 mb-8 grid grid-cols-1 md:grid-cols-2 gap-5">
       <div class="field-wrap"><label class="field-label">Nombre</label><input class="field-input" [(ngModel)]="draft.name"></div>
       <div class="field-wrap"><label class="field-label">Imagen (URL)</label><input class="field-input" [(ngModel)]="draft.imageUrl"></div>
@@ -43,7 +42,6 @@ const EMPTY: Omit<VenuePackage, 'id'> = {
       </div>
     </div>
 
-    <!-- List -->
     <div class="divide-y divide-[#F5F0EB]/8">
       <div *ngFor="let pkg of packages()" class="flex items-center justify-between py-4 gap-4">
         <div class="flex items-center gap-4 min-w-0">

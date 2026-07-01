@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "C:/Users/oscar/grand-imperio/src/**/*.html",
-    "C:/Users/oscar/grand-imperio/src/**/*.ts",
+    "./src/**/*.html",
+    "./src/**/*.ts",
   ],
   theme: {
     extend: {

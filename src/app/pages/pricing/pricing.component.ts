@@ -10,20 +10,19 @@ import { VenuePackage } from '../../core/models/package.model';
   standalone: true,
   imports: [NgFor, NgIf, CurrencyPipe, FormsModule],
   template: `
-    <section class="pt-36 pb-14 px-6 lg:px-16 xl:px-20 bg-[#0A0A0A]">
+    <section class="pt-32 lg:pt-36 pb-12 px-6 lg:px-16 xl:px-20 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
-        <div class="w-8 h-[3px] bg-[#C9A84C] mb-8"></div>
-        <h1 class="font-display font-black text-[#F5F0EB] uppercase leading-[0.95] tracking-[-0.02em]"
-            style="font-size: clamp(2.4rem, 5.5vw, 4.5rem)">
-          Paquetes y<br><span class="text-[#C9A84C]">cotización.</span>
+        <h1 class="font-display font-semibold text-[#F5F0EB] leading-[1.1] tracking-[-0.01em]"
+            style="font-size: clamp(2rem, 4.5vw, 3.4rem)">
+          Paquetes y <span class="text-[#C9A84C]">cotización.</span>
         </h1>
-        <p class="text-[#F5F0EB]/55 mt-5 text-[15px] font-light leading-relaxed max-w-lg">
+        <p class="text-[#F5F0EB]/50 mt-4 text-[15px] leading-relaxed max-w-lg">
           Elige una base, ajusta el número de invitados y obtén tu estimado al instante. Te contactamos para confirmar los detalles finales.
         </p>
       </div>
     </section>
 
-    <section class="px-6 lg:px-16 xl:px-20 pb-20 bg-[#0A0A0A]">
+    <section data-tour="pricing" class="px-6 lg:px-16 xl:px-20 pb-20 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
         <div *ngIf="loading()" class="text-[#F5F0EB]/35 text-sm py-12">Cargando paquetes...</div>
         <div *ngIf="!loading() && packages().length === 0" class="text-[#F5F0EB]/35 text-sm py-12">
@@ -32,34 +31,34 @@ import { VenuePackage } from '../../core/models/package.model';
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4" *ngIf="packages().length">
           <div *ngFor="let pkg of packages(); let i = index"
-               class="reveal relative overflow-hidden bg-[#111111] border border-[#F5F0EB]/8 flex flex-col"
+               class="reveal relative overflow-hidden bg-[#111111] border border-[#F5F0EB]/8 rounded-2xl flex flex-col"
                [class.lg:col-span-2]="i === 0">
 
             <div class="relative overflow-hidden img-zoom" [class.h-[260px]]="i !== 0" [class.h-[320px]]="i === 0">
               <img [src]="pkg.imageUrl" [alt]="pkg.name" class="w-full h-full object-cover">
               <div *ngIf="pkg.featured"
-                   class="absolute top-4 left-4 bg-[#C9A84C] text-[#0A0A0A] text-[9px] font-bold tracking-[0.25em] uppercase px-3 py-1.5">
+                   class="absolute top-4 left-4 bg-[#C9A84C] text-[#0A0A0A] text-xs font-medium px-3 py-1.5 rounded-full">
                 Más solicitado
               </div>
             </div>
 
             <div class="flex-1 flex flex-col p-7 lg:p-8">
-              <h3 class="font-display font-black text-[#F5F0EB] uppercase text-xl lg:text-2xl tracking-tight mb-2">
+              <h3 class="font-display font-semibold text-[#F5F0EB] text-xl lg:text-2xl mb-2">
                 {{ pkg.name }}
               </h3>
-              <p class="text-[#F5F0EB]/40 text-[12px] font-light tracking-wide mb-5">
+              <p class="text-[#F5F0EB]/40 text-sm mb-5">
                 Base {{ pkg.basePersonCount }} personas
               </p>
 
-              <p class="font-display font-black text-[#C9A84C] leading-none mb-1" style="font-size: clamp(1.8rem, 3vw, 2.6rem)">
+              <p class="font-display font-semibold text-[#C9A84C] leading-none mb-1" style="font-size: clamp(1.6rem, 2.6vw, 2.2rem)">
                 {{ pkg.basePrice | currency:'MXN':'symbol':'1.0-0' }}
               </p>
-              <p class="text-[#F5F0EB]/35 text-[11px] font-light mb-6">
+              <p class="text-[#F5F0EB]/35 text-xs mb-6">
                 + {{ pkg.pricePerExtraPerson | currency:'MXN':'symbol':'1.0-0' }} por persona extra
               </p>
 
               <ul class="space-y-2.5 mb-8 flex-1">
-                <li *ngFor="let item of pkg.includes" class="flex items-start gap-2.5 text-[#F5F0EB]/55 text-[13px] font-light leading-snug">
+                <li *ngFor="let item of pkg.includes" class="flex items-start gap-2.5 text-[#F5F0EB]/55 text-[13px] leading-snug">
                   <svg width="13" height="13" viewBox="0 0 14 14" fill="none" class="flex-shrink-0 mt-0.5 text-[#C9A84C]">
                     <path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -68,11 +67,10 @@ import { VenuePackage } from '../../core/models/package.model';
               </ul>
 
               <button (click)="selectPackage(pkg)"
-                      class="btn-grand w-full px-6 py-3.5 text-[10px] font-bold tracking-[0.25em] uppercase
-                             text-center"
+                      class="btn-grand w-full px-6 py-3 rounded-full text-sm font-medium text-center"
                       [class]="selectedPackage()?.id === pkg.id
                         ? 'bg-[#C9A84C] text-[#0A0A0A]'
-                        : 'border border-[#F5F0EB]/20 text-[#F5F0EB]/65 hover:border-[#C9A84C]/60 hover:text-[#C9A84C]'">
+                        : 'border border-[#F5F0EB]/15 text-[#F5F0EB]/65 hover:border-[#C9A84C]/50 hover:text-[#C9A84C]'">
                 {{ selectedPackage()?.id === pkg.id ? 'Paquete seleccionado' : 'Cotizar este paquete' }}
               </button>
             </div>
@@ -83,9 +81,9 @@ import { VenuePackage } from '../../core/models/package.model';
 
     <section #calculator class="py-20 lg:py-28 px-6 lg:px-16 xl:px-20 bg-[#111111] border-t border-[#C9A84C]/15">
       <div class="max-w-4xl mx-auto">
-        <p class="text-[#C9A84C] text-[9px] font-semibold tracking-[0.5em] uppercase mb-4">Calculadora</p>
-        <h2 class="font-display font-black text-[#F5F0EB] uppercase leading-[1.0] tracking-[-0.02em] mb-10"
-            style="font-size: clamp(1.8rem, 3.5vw, 3rem)">
+        <p class="text-[#C9A84C] text-xs font-medium mb-4">Calculadora</p>
+        <h2 class="font-display font-semibold text-[#F5F0EB] leading-[1.1] tracking-[-0.01em] mb-10"
+            style="font-size: clamp(1.6rem, 3vw, 2.4rem)">
           Tu estimado, al instante.
         </h2>
 
@@ -142,23 +140,22 @@ import { VenuePackage } from '../../core/models/package.model';
             </div>
           </div>
 
-          <div class="bg-[#0A0A0A] border border-[#C9A84C]/20 p-8 flex flex-col h-fit">
-            <p class="text-[#F5F0EB]/35 text-[10px] font-semibold tracking-[0.3em] uppercase mb-3">Total estimado</p>
-            <p class="font-display font-black text-[#C9A84C] leading-none mb-6" style="font-size: clamp(2.2rem, 4vw, 3.2rem)">
+          <div class="bg-[#0A0A0A] border border-[#F5F0EB]/10 rounded-2xl p-8 flex flex-col h-fit">
+            <p class="text-[#F5F0EB]/35 text-xs font-medium mb-3">Total estimado</p>
+            <p class="font-display font-semibold text-[#C9A84C] leading-none mb-6" style="font-size: clamp(1.9rem, 3.4vw, 2.6rem)">
               {{ estimatedTotal() | currency:'MXN':'symbol':'1.0-0' }}
             </p>
-            <div class="space-y-2 text-[12px] text-[#F5F0EB]/45 font-light border-t border-[#F5F0EB]/8 pt-5 mb-7">
+            <div class="space-y-2 text-[13px] text-[#F5F0EB]/45 border-t border-[#F5F0EB]/8 pt-5 mb-7">
               <div class="flex justify-between"><span>Paquete base</span><span>{{ selectedPackage()?.basePrice ? (selectedPackage()!.basePrice | currency:'MXN':'symbol':'1.0-0') : '—' }}</span></div>
               <div class="flex justify-between"><span>Invitados extra</span><span>{{ extraGuests() }}</span></div>
               <div class="flex justify-between"><span>Costo por extra</span><span>{{ extraCost() | currency:'MXN':'symbol':'1.0-0' }}</span></div>
             </div>
             <button (click)="submitQuote()"
                     [disabled]="!canSubmit() || saving()"
-                    class="btn-grand w-full px-6 py-3.5 bg-[#C9A84C] text-[#0A0A0A] text-[10px] font-bold
-                           tracking-[0.25em] uppercase disabled:opacity-35 disabled:cursor-not-allowed">
+                    class="btn-grand w-full px-6 py-3.5 rounded-full bg-[#C9A84C] text-[#0A0A0A] text-sm font-medium disabled:opacity-35 disabled:cursor-not-allowed">
               {{ saving() ? 'Enviando...' : 'Solicitar cotización' }}
             </button>
-            <p class="text-[#F5F0EB]/25 text-[10px] font-light mt-4 leading-relaxed">
+            <p class="text-[#F5F0EB]/25 text-xs mt-4 leading-relaxed">
               Este es un estimado. Confirmaremos el precio final contigo por teléfono o WhatsApp.
             </p>
           </div>
@@ -170,12 +167,12 @@ import { VenuePackage } from '../../core/models/package.model';
               <path d="M4 12.5L9 17.5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <h3 class="font-display font-black text-[#F5F0EB] uppercase text-2xl mb-3">Cotización recibida</h3>
-          <p class="text-[#F5F0EB]/45 text-sm font-light max-w-md mx-auto leading-relaxed">
+          <h3 class="font-display font-semibold text-[#F5F0EB] text-2xl mb-3">Cotización recibida</h3>
+          <p class="text-[#F5F0EB]/45 text-sm max-w-md mx-auto leading-relaxed">
             Gracias, {{ form.name }}. Nuestro equipo te contactará pronto para confirmar los detalles de tu evento.
           </p>
           <a [href]="whatsappLink()" target="_blank" rel="noopener noreferrer"
-             class="btn-grand inline-flex items-center gap-3 mt-8 px-8 py-3.5 bg-[#25D366] text-[#0A0A0A] text-[10px] font-bold tracking-[0.25em] uppercase">
+             class="btn-grand inline-flex items-center gap-3 mt-8 px-8 py-3.5 rounded-full bg-[#25D366] text-[#0A0A0A] text-sm font-medium">
             Confirmar por WhatsApp
           </a>
         </div>

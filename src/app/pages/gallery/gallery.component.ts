@@ -12,23 +12,22 @@ interface GalleryImage {
   standalone: true,
   imports: [NgFor, NgIf],
   template: `
-    <section class="pt-36 pb-12 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A]">
+    <section class="pt-32 lg:pt-36 pb-10 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A]">
       <div class="max-w-7xl mx-auto">
-        <div class="w-8 h-px bg-[#C9A84C] mb-8"></div>
-        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-[#F5F0EB] font-light leading-tight">Galería</h1>
-        <p class="text-[#F5F0EB]/52 mt-4 text-[15px] leading-relaxed max-w-md">
+        <h1 class="font-display text-4xl md:text-5xl text-[#F5F0EB] font-semibold leading-tight">Galería</h1>
+        <p class="text-[#F5F0EB]/50 mt-3 text-[15px] leading-relaxed max-w-md">
           Espacios, eventos y detalles que hacen de cada celebración un momento único.
         </p>
       </div>
     </section>
 
-    <section class="bg-[#0A0A0A] px-6 lg:px-16 xl:px-24 sticky top-[68px] z-[var(--z-sticky)] border-b border-[#F5F0EB]/8">
-      <div class="max-w-7xl mx-auto flex gap-8 lg:gap-10" role="tablist">
+    <section class="bg-[#0A0A0A] px-6 lg:px-16 xl:px-24 sticky top-16 lg:top-[72px] z-[var(--z-sticky)] border-b border-[#F5F0EB]/8">
+      <div class="max-w-7xl mx-auto flex gap-7 lg:gap-9" role="tablist">
         <button *ngFor="let tab of tabs"
                 (click)="setTab(tab.key)"
                 role="tab"
                 [attr.aria-selected]="activeTab() === tab.key"
-                class="gallery-tab text-[11px] tracking-[0.22em] uppercase py-4 pb-[15px] relative"
+                class="gallery-tab text-sm py-4 pb-[15px] relative"
                 [class.tab-active]="activeTab() === tab.key"
                 [style.color]="activeTab() === tab.key ? '#C9A84C' : 'rgba(245,240,235,0.40)'">
           {{ tab.label }}
@@ -36,10 +35,10 @@ interface GalleryImage {
       </div>
     </section>
 
-    <section class="py-10 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A] min-h-screen" role="tabpanel">
+    <section data-tour="gallery-grid" class="py-10 px-6 lg:px-16 xl:px-24 bg-[#0A0A0A] min-h-screen" role="tabpanel">
       <div class="max-w-7xl mx-auto columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
         <div *ngFor="let img of filteredImages()"
-             class="break-inside-avoid group relative overflow-hidden cursor-pointer img-zoom"
+             class="break-inside-avoid group relative overflow-hidden cursor-pointer img-zoom rounded-xl"
              (click)="openLightbox(img)"
              tabindex="0"
              [attr.aria-label]="'Ver imagen: ' + img.alt"
